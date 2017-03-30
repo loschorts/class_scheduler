@@ -5,11 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'bootstrap'
 gem 'figaro'
 gem 'cloudinary'
 gem 'pry-rails'
 gem 'devise'
+gem "therubyracer"
+gem "less-rails"
 
 gem 'twitter-bootstrap-rails'
 
