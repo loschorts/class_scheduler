@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
 
-	namespace :api, defaults: {format: :json} do 
-		resources :klasses
-	  resources :tutors
-	  resources :students
-	  get :current_user, to: "sessions#show"
-	  devise_for :users
-	  devise_for :tutors
-	  devise_for :students
-	end
+  resources :users
+  resources :tutors
+  resources :students
+  resources :klasses, path: :classes
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
