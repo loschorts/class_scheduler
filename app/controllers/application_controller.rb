@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-	before_action :set_locale
   protect_from_forgery with: :exception
+	
+	before_action :set_locale
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :toggle_language
 
@@ -40,5 +42,14 @@ class ApplicationController < ActionController::Base
 		cur = request.fullpath[3..-1]
 		(I18n.locale == :en ? "/es" : "/en") + cur
 	end
+
+	protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+    	:email, :f_name, :l_name, :password, :password_confirmation, :language,
+      :profile_src
+    	])
+  end
 
 end

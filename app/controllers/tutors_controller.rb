@@ -1,4 +1,4 @@
-class TutorsController < ApplicationController
+class TutorsController < Devise::RegistrationsController
   before_action :set_tutor, only: [:show, :edit, :update, :destroy]
 
   # GET /tutors
@@ -14,7 +14,7 @@ class TutorsController < ApplicationController
 
   # GET /tutors/new
   def new
-    @tutor = Tutor.new
+    super
   end
 
   # GET /tutors/1/edit
@@ -24,17 +24,7 @@ class TutorsController < ApplicationController
   # POST /tutors
   # POST /tutors.json
   def create
-    @tutor = Tutor.new(tutor_params)
-
-    respond_to do |format|
-      if @tutor.save
-        format.html { redirect_to @tutor, notice: 'Tutor was successfully created.' }
-        format.json { render :show, status: :created, location: @tutor }
-      else
-        format.html { render :new }
-        format.json { render json: @tutor.errors, status: :unprocessable_entity }
-      end
-    end
+    super
   end
 
   # PATCH/PUT /tutors/1

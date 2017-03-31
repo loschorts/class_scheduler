@@ -4,3 +4,5 @@ en:
   spanish: "Spanish"
   email_address: "Email Address"
   language_warning: "Only certain individuals are eligible to take the naturalization exam in their native language."
+  f_name: "First Name"
+  l_name: "Last Name"

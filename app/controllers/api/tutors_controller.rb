@@ -2,7 +2,6 @@ class Api::TutorsController < ApplicationController
 	before_action :authenticate_api_user!, only: [:update, :destroy]
 
 	def create
-		@user = Tutor.new(user_params)
 		if @user.save
 			sign_in(@user)
 			render 'api/tutors/show'
