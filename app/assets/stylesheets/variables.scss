@@ -1,0 +1,44 @@
+$light-blue: #42c2f4;
+$gray: #c3d5e0;
+$font-stack: "Open Sans", sans-serif;
+$header-height: 3rem;
+
+$s: 640;
+$m: 700;
+$l: 900;
+
+$s-px: 640px;
+$m-px: 700px;
+$l-px: 900px;
+
+
+$cloud_url: "http://res.cloudinary.com/tutoria/image/upload";
+
+@mixin row() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin column() {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin bg_scale($src) {
+
+	background: url("#{$cloud_url}/c_scale,w_2200/#{$src}");
+
+	@media (max-width: $s){
+		background: url("#{$cloud_url}/c_scale,w_#{$s}/#{$src}");
+	}
+
+	@media (max-width: $m){
+		background: url("#{$cloud_url}/c_scale,w_#{$m}/#{$src}");
+	}
+	@media (max-width: $l){
+		background: url("#{$cloud_url}/c_scale,w_#{$l}/#{$src}");
+	}
+}

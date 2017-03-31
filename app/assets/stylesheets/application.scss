@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+@import "variables.scss";
+
+section {
+	@include column();
+	padding: 1em;
+	background: white;
+}
+
+#header {
+	margin-bottom: 0;
+}
+
+#notice {
+	margin-bottom: 0;
+}
+
+.orange {
+	color: orange;
+}

@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 	before_action :set_locale
   protect_from_forgery with: :exception
 
+  helper_method :toggle_language
+
   def user_params
 		params.require(:user).permit(
 			:email, 
@@ -20,9 +22,6 @@ class ApplicationController < ActionController::Base
 		current_api_user.is_a?(Tutor)
 	end
 
-
-	
-	 
 	def set_locale
 	  I18n.locale = extract_locale_from_subdomain || I18n.default_locale
 	end
@@ -37,5 +36,9 @@ class ApplicationController < ActionController::Base
 	  { locale: I18n.locale }
 	end
 
+	def toggle_language
+		cur = request.fullpath[3..-1]
+		(I18n.locale == :en ? "/es" : "/en") + cur
+	end
 
 end

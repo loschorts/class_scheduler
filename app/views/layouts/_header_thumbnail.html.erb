@@ -1,0 +1,14 @@
+<% if !current_user %>
+
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+
+<% else %>
+
+  <span class="sr-only">Toggle navigation</span>
+	<span><%=current_user.f_name%></span>
+	<img src=<%=current_user.profile_src%>/>
+
+<% end %>

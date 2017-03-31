@@ -12,6 +12,11 @@
 
   <body>
     <%= render "layouts/header" %>
-    <%= yield %>
+    <%= content_tag(:div, flash[:notice], {id: "notice", class: "alert alert-info"}) if flash[:notice] %>
+    <%= content_tag(:div, flash[:alert], {id: "notice", class: "alert alert-warning"}) if flash[:alert] %>
+    <%= content_tag(:div, flash[:error], {id: "notice", class: "alert alert-danger"}, c) if flash[:error] %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,0 +1,9 @@
+@import "variables.scss";
+
+#home-jumbotron {
+	color: white;
+	@include bg_scale("assets/home_bg");
+	background-size: cover;
+	background-position: 50% 50%;
+	min-height: 60vh;
+}
