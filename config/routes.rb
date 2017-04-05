@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 	scope "(:locale)", locale: /en|es/ do
 		root to: "pages#home"
 		devise_for :students
-		devise_for :tutors, path: :volunteers
+		devise_for :tutors
 		devise_for :users
 	  resources :users
 	  resources :tutors, path: :volunteers

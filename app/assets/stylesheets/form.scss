@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .cloudinary-button {
 	text-align: center;
 	margin: 1em;
@@ -12,4 +14,10 @@
 
 #error-explanation {
 	color: red;
+}
+
+.form-errors {
+	padding: 0;
+	color: red;
+	list-style: none;
 }

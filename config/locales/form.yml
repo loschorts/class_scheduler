@@ -6,3 +6,5 @@ en:
   language_warning: "Only certain individuals are eligible to take the naturalization exam in their native language."
   f_name: "First Name"
   l_name: "Last Name"
+  about_notice: "Tell us a little bit about yourself (max 140 characters)."
+  delete_account: "Delete Account"

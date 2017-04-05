@@ -1,0 +1,72 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name, html: {class: "user-form"})) do |f| %>
+
+  <%= f.hidden_field :profile_src, value: resource.profile_src, id: "profile-src" %>
+  <%= f.hidden_field :profile_public_id, value: resource.profile_public_id, id: "profile-public-id" %>
+
+  <div class="field form-group">
+    <%= f.label t("email_address") %><br />
+    <%= render "layouts/form_error", errors: resource.errors[:email]%>
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label t("f_name") %><br />
+    <%= render "layouts/form_error", errors: resource.errors[:f_name]%>
+    <%= f.text_field :f_name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label t("l_name") %><br />
+    <%= render "layouts/form_error", errors: resource.errors[:l_name]%>
+    <%= f.text_field :l_name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password %>
+    <%= render "layouts/form_error", errors: resource.errors[:password]%>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= render "layouts/form_error", errors: resource.errors[:password_confirmation]%>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <label for="language-select"><%=t("language")%></label>
+    <%= render "layouts/form_error", errors: resource.errors[:language]%>
+    <%= f.select_tag "#{resource_name}[language]", options_for_select([
+        [t("english"), "en"],
+        [t("spanish"), "es"]
+        ]), class: "form-control", id: "language-select" %>
+    <p><small id="emailHelp" class="form-text text-muted orange"><%=t("language_warning")%></small></p>
+  </div>
+
+  <div class="form-group">
+    <label for="about"><%=t("about")%></label>
+    <%= render "layouts/form_error", errors: resource.errors[:about]%>
+    <%= f.text_area_tag "#{resource_name}[about]", resource.about,
+    class: "form-control", id: "about", rows: "3" %>
+    <p><small id="about_notice" class="form-text text-muted"><%=t("about_notice")%></small></p>
+  </div>
+
+  <div class="form-group">
+    <label for="profile-src-uploader"><%=t("profile_picture")%></label>
+    <%= render "layouts/form_error", errors: resource.errors[:profile_src]%>
+    <div class="upload-preview">
+      <img src="<%=resource.profile_src%>">
+    </div>
+
+    <div><div class="uploader"></div></div>
+
+    <small id="fileHelp" class="form-text text-muted">Click to upload a profile picture.</small>
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+<% end %>

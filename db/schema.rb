@@ -10,29 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331165237) do
+ActiveRecord::Schema.define(version: 20170331192917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "klasses", force: :cascade do |t|
     t.integer  "tutor_id"
-    t.string   "category",    null: false
-    t.string   "title",       null: false
+    t.string   "category",                   null: false
+    t.string   "title",                      null: false
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "language"
+    t.string   "language",    default: "en", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["tutor_id"], name: "index_klasses_on_tutor_id", using: :btree
-  end
-
-  create_table "languages", force: :cascade do |t|
-    t.string   "language"
-    t.string   "owner_type"
-    t.integer  "owner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_type", "owner_id"], name: "index_languages_on_owner_type_and_owner_id", using: :btree
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -64,23 +55,25 @@ ActiveRecord::Schema.define(version: 20170331165237) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",        null: false
-    t.string   "encrypted_password",     default: "",        null: false
+    t.string   "email",                              default: "",   null: false
+    t.string   "encrypted_password",                 default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,         null: false
+    t.integer  "sign_in_count",                      default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "f_name",                                     null: false
-    t.string   "l_name",                                     null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "f_name",                                            null: false
+    t.string   "l_name",                                            null: false
     t.string   "profile_src"
-    t.string   "type",                   default: "Student", null: false
-    t.string   "language"
+    t.string   "type",                                              null: false
+    t.string   "language",                           default: "en", null: false
+    t.string   "about",                  limit: 140,                null: false
+    t.string   "profile_public_id",                                 null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["f_name"], name: "index_users_on_f_name", using: :btree
     t.index ["l_name"], name: "index_users_on_l_name", using: :btree

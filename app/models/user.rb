@@ -3,12 +3,34 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
       
   LANGUAGES = I18n.available_locales.map(&:to_s)
+  after_validation :remove_old_profile_picture
 
-  validates :f_name, :l_name, :language, presence: true
-  validates :profile_src, presence: true
-  validates :language, inclusion: {in: LANGUAGES}
+  validates :f_name, :l_name, :language, :about, presence: true
+  validates :about, length: { maximum: 140, minimum: 10, allow_nil: true, allow_blank: true }
+  validates :profile_src, :profile_public_id, presence: true
+  validates :language, inclusion: {in: LANGUAGES, allow_nil: true}
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def profile_public_id= new_id
+    @old_id = self.profile_public_id
+    write_attribute(:profile_public_id, new_id)
+  end
+
+  protected
+
+  def remove_old_profile_picture
+    isValid = self.errors.empty?
+    successful_update = isValid && @old_id && @old_id != self.profile_public_id
+    unsuccessful_create = self.new_record? && !isValid && self.profile_public_id
+
+    if successful_update || unsuccessful_create
+      puts "deleting #{@old_id}"
+      Cloudinary::Uploader.destroy(@old_id) if @old_id
+    end
+
+  end
+
 
 end

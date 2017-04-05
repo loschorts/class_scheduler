@@ -6,20 +6,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :toggle_language
 
-  def user_params
-		params.require(:user).permit(
-			:email, 
-			:password, 
-			:phone_number, 
-			:f_name, 
-			:l_name, 
-			:type, 
-			:image, 
-			:profile_src,
-			:language
-		)
-	end
-
 	def authenticate_user_is_tutor
 		current_api_user.is_a?(Tutor)
 	end
@@ -39,6 +25,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def toggle_language
+		#TODO Broken
 		cur = request.fullpath[3..-1]
 		(I18n.locale == :en ? "/es" : "/en") + cur
 	end
@@ -48,8 +35,14 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
     	:email, :f_name, :l_name, :password, :password_confirmation, :language,
-      :profile_src
+      :profile_src, :about, :profile_public_id
     	])
+
+    devise_parameter_sanitizer.permit(:account_update, keys: [
+    	:email, :f_name, :l_name, :password, :password_confirmation, :language,
+      :profile_src, :about, :profile_public_id
+    	])
+
   end
 
 end

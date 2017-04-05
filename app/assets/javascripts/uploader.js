@@ -24,10 +24,11 @@ document.addEventListener("DOMContentLoaded", function(){
 					console.error("Cloudinary upload error:", error.message)
 				}
 			} else {			
+				console.log(result[0])
 				$(".upload-preview").html($("<img/>", {
 					src: result[0].secure_url
 				}))
-
+				$("#profile-public-id").val(result[0].public_id)
 				$("#profile-src").val(result[0].secure_url)
 			}
 		});
