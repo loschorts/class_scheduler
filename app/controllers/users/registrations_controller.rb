@@ -9,7 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super 
+  #   super
+  #   set_message
   # end
 
   # GET /resource/edit
@@ -20,6 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   # def update
   #   super
+  #   set_message
   # end
 
   # DELETE /resource
@@ -57,4 +59,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def set_message
+    flash.now[:error] = t("not_saved") unless @user.errors.empty? 
+    p flash.now[:error]
+  end
 end

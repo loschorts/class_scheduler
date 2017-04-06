@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 	before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :toggle_language
+  helper_method :toggle_language, :user_type
 
 	def set_locale
 	  I18n.locale = extract_locale_from_subdomain || I18n.default_locale
@@ -26,19 +26,20 @@ class ApplicationController < ActionController::Base
 		(I18n.locale == :en ? "/es" : "/en") + cur
 	end
 
+	def user_type
+		(params[:type] || (@user.type if @user) || "Student").capitalize
+	end
+
 	protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [
+  	permitted = [
     	:email, :f_name, :l_name, :password, :password_confirmation, :language,
-      :profile_src, :about, :profile_public_id
-    	])
+      :profile_src, :about, :profile_public_id, :type
+    	]
+    devise_parameter_sanitizer.permit(:sign_up, keys: permitted)
 
-    devise_parameter_sanitizer.permit(:account_update, keys: [
-    	:email, :f_name, :l_name, :password, :password_confirmation, :language,
-      :profile_src, :about, :profile_public_id
-    	])
-
+    devise_parameter_sanitizer.permit(:account_update, keys: permitted)
   end
 
 end

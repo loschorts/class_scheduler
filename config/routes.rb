@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 			edit: "profile", 
 			sign_in: "login",
 			sign_up: "signup"
+		},
+		controllers: {
+			registrations: "users/registrations"
 		}
 
 	end

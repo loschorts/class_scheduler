@@ -2,7 +2,7 @@
 
   <%= f.hidden_field :profile_src, value: resource.profile_src, id: "profile-src" %>
   <%= f.hidden_field :profile_public_id, value: resource.profile_public_id, id: "profile-public-id" %>
-  <%= f.hidden_field :type, value: params[:type], id: "user-type" %>
+  <%= f.hidden_field :type, value: user_type, id: "user-type" %>
 
   <div class="field form-group">
     <%= f.label t("email_address") %><br />

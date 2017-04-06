@@ -1,4 +1,4 @@
 <section>
-<h2>Sign up</h2>
+<h2><%= user_type.capitalize + " " + t("sign_up")%></h2>
 <%= render "devise/registrations/form", locals: {resource: resource} %>
 </section>
