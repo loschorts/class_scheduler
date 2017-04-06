@@ -6,10 +6,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :toggle_language
 
-	def authenticate_user_is_tutor
-		current_api_user.is_a?(Tutor)
-	end
-
 	def set_locale
 	  I18n.locale = extract_locale_from_subdomain || I18n.default_locale
 	end
