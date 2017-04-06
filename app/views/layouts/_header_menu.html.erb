@@ -2,8 +2,8 @@
 
 <div class="navbar-collapse collapse navbar-static-top navbar-right" id="header-menu">
   <ul class="nav navbar-nav">
-    <li><a href=<%=new_student_registration_url%>><%=t("navbar_signup_students")%></a></li>
-    <li><a href=<%=new_tutor_registration_url%>><%=t("navbar_signup_volunteers")%></a></li>
+    <li><a href=<%=new_user_registration_url(type: "student")%>><%=t("navbar_signup_students")%></a></li>
+    <li><a href=<%=new_user_registration_url(type: "tutor")%>><%=t("navbar_signup_volunteers")%></a></li>
     <li><a href=<%=toggle_language%>><%=t("navbar_switch_language")%></a></li>
     <li><a href=<%=new_user_session_url%>><%=t("sign_in")%></a></li>
   </ul>

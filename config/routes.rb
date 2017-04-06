@@ -3,14 +3,11 @@ Rails.application.routes.draw do
 	scope "(:locale)", locale: /en|es/ do
 		root to: "pages#home"
 
-		devise_for :user, path: "/", path_names: {
+		devise_for :user, except: [:sign_up], path: "/", path_names: {
 			edit: "profile", 
 			sign_in: "login",
 			sign_up: "signup"
 		}
-
-
-
 
 	end
 

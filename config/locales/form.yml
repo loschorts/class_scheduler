@@ -8,3 +8,6 @@ en:
   l_name: "Last Name"
   about_notice: "Tell us a little bit about yourself (max 140 characters)."
   delete_account: "Delete Account"
+  user_type: "I want to"
+  user_type_student: "take classes"
+  user_type_volunteer: "teach"
