@@ -1,4 +1,19 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name, html: {class: "user-form"})) do |f| %>
+<% 
+  if form_type == :edit
+
+    pw_label = :change_password
+    pw_confirm_label = :confirm_new_password
+  else
+    pw_label = :password
+    pw_confirm_label = :confirm_new_password
+  end
+%>
+
+<%= form_for(
+  resource, 
+  as: resource_name, 
+  url: registration_path(resource_name)
+) do |f| %>
 
   <%= f.hidden_field :profile_src, value: resource.profile_src, id: "profile-src" %>
   <%= f.hidden_field :profile_public_id, value: resource.profile_public_id, id: "profile-public-id" %>
@@ -20,21 +35,6 @@
     <%= f.label t("l_name") %><br />
     <%= render "layouts/form_error", errors: resource.errors[:l_name]%>
     <%= f.text_field :l_name, autofocus: true, class: "form-control" %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label :password %>
-    <%= render "layouts/form_error", errors: resource.errors[:password]%>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label :password_confirmation %><br />
-    <%= render "layouts/form_error", errors: resource.errors[:password_confirmation]%>
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field form-group">
@@ -67,6 +67,28 @@
     <small id="fileHelp" class="form-text text-muted">Click to upload a profile picture.</small>
 
   </div>
+
+  <div class="field form-group">
+    <%= f.label pw_label %>
+    <%= render "layouts/form_error", errors: resource.errors[:password]%>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label pw_confirm_label %><br />
+    <%= render "layouts/form_error", errors: resource.errors[:password_confirmation]%>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <% if form_type == :edit %>
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+  <% end %>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 

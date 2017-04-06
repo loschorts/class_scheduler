@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
       
   LANGUAGES = I18n.available_locales.map(&:to_s)
-  after_validation :remove_old_profile_picture
+  before_save :remove_old_profile_picture
 
   validates :f_name, :l_name, :language, :about, presence: true
   validates :about, length: { maximum: 140, minimum: 10, allow_nil: true, allow_blank: true }
@@ -26,6 +26,7 @@ class User < ApplicationRecord
     unsuccessful_create = self.new_record? && !isValid && self.profile_public_id
 
     if successful_update || unsuccessful_create
+      debugger
       puts "deleting #{@old_id}"
       Cloudinary::Uploader.destroy(@old_id) if @old_id
     end
