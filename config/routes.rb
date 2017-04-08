@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 	scope "(:locale)", locale: /en|es/ do
 		root to: "pages#home"
-		get "search", to: "classes#index"
+		get "search", to: "klasses#index"
 		devise_for :user, except: [:sign_up], path: "/", path_names: {
 			edit: "profile", 
 			sign_in: "login",
