@@ -22,10 +22,9 @@ class User < ApplicationRecord
 
   def remove_old_profile_picture
     isValid = self.errors.empty?
+    
     successful_update = isValid && @old_id && @old_id != self.profile_public_id
     unsuccessful_create = self.new_record? && !isValid && self.profile_public_id
-
-    debugger
     
     if successful_update || unsuccessful_create
       Cloudinary::Uploader.destroy(@old_id) if @old_id
