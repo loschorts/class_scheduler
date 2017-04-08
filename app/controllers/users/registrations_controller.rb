@@ -64,7 +64,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def set_message
-    flash.now[:error] = t("not_saved") unless @user.errors.empty? 
-    p flash.now[:error]
+    flash.now[:error] = t("not_saved") unless @user.errors.empty?
   end
 end

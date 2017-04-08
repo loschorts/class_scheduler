@@ -25,12 +25,11 @@ class User < ApplicationRecord
     successful_update = isValid && @old_id && @old_id != self.profile_public_id
     unsuccessful_create = self.new_record? && !isValid && self.profile_public_id
 
+    debugger
+    
     if successful_update || unsuccessful_create
-      debugger
-      puts "deleting #{@old_id}"
       Cloudinary::Uploader.destroy(@old_id) if @old_id
     end
-
   end
 
 
